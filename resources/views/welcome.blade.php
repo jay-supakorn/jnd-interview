@@ -11,7 +11,7 @@
     </head>
     <body >
         {{-- class="antialiased" --}}
-        <div class="flex items-top justify-center py-4">
+        {{-- <div class="flex items-top justify-center py-4">
             @if (Route::has('login'))
                 <div class="px-6 py-4">
                     @auth
@@ -24,7 +24,7 @@
                     @endauth
                 </div>
             @endif
-        </div>
+        </div> --}}
         <div id="app"></div>
         Footer Content
     </body>
