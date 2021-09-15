@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Shorten;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +18,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/{uri?}', function ($uri = null) {
     if (!in_array($uri, ['login', 'register', 'dashboard']) && $uri) {
-        return $uri;
+        $shorten = Shorten::where('link_shorten', $uri)->first();
+        if (strpos($shorten->link_original, 'http')) {
+            $url = "http://$shorten->link_original";
+        } else {
+            if (strpos($shorten->link_original, 'https')) {
+                $url = "https://$shorten->link_original";
+            } else {
+                $url = $shorten->link_original;
+            }
+        }
+        return Redirect::to($url);
     } else {
         return view('welcome');
     }
