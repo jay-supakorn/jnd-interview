@@ -3,29 +3,22 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Laravel</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <script src="{{ asset('js/app.js') }}" defer></script>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <meta charset="UTF-8" />
     </head>
-    <body >
-        {{-- class="antialiased" --}}
-        {{-- <div class="flex items-top justify-center py-4">
-            @if (Route::has('login'))
-                <div class="px-6 py-4">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
+    <body style="background-color: #f5f5f5;">
+        <div class="max-w-2xl mx-auto bg-white shadow-md pb-12 items-center my-auto flex flex-col">
+            <div class="w-full">
+                <div class="flex flex-row w-full space-x-4 my-4 justify-end px-6">
+                    <a href="/" class="py-2 text-blue-800 text-center hover:underline">Home</a>
+                    <a href="/login" class="py-2 text-blue-800 text-center hover:underline">Login</a>
+                    <a href="/register" class="py-2 text-blue-800 text-center hover:underline">Register</a>
                 </div>
-            @endif
-        </div> --}}
-        <div id="app"></div>
-        Footer Content
+                <div id="app"></div>
+            </div>
+        </div>
     </body>
 </html>

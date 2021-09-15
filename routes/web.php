@@ -14,14 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{uri?}', function () {
-    return view('welcome');
+Route::get('/{uri?}', function ($uri = null) {
+    if (!in_array($uri, ['login', 'register', 'dashboard']) && $uri) {
+        return $uri;
+    } else {
+        return view('welcome');
+    }
 })->where('uri', '(.*)');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -25,19 +25,8 @@ const slice = createSlice({
 
 const { setUser } = slice.actions;
 
-export const login = (username, password) => async (dispatch) => {
-    // let response;
-    // try {
-    //     response = await Service.webapi.login({
-    //         username,
-    //         password,
-    //     });
-    // } catch (error) {
-    //     console.log(error.message);
-    //     throw error;
-    // }
-    // const data = response.data;
-    // dispatch(setUser(data));
+export const login = (data) => async (dispatch) => {
+    dispatch(setUser(data));
 };
 
 export default slice.reducer;

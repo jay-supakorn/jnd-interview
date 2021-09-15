@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 
 import user from "./reducers/user";
+import shorten from "./reducers/shorten";
 
 const persistConfig = {
     key: "priestMe",
@@ -12,6 +13,7 @@ const persistConfig = {
 
 const reducer = combineReducers({
     user,
+    shorten,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
