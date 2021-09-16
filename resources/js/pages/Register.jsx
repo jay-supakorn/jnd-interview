@@ -42,6 +42,30 @@ class Register extends Component {
     render() {
         return (
             <>
+                <div className="flex flex-row w-full space-x-4 my-4 justify-between px-6">
+                    <div>
+                        <a
+                            href="/"
+                            className="py-2 text-blue-800 text-center hover:underline"
+                        >
+                            หน้าหลัก
+                        </a>
+                    </div>
+                    <div className="space-x-3">
+                        {/* <a
+                            href="/dashboard"
+                            className="py-2 text-blue-800 text-center hover:underline"
+                        >
+                            ผู้ดูแลระบบ
+                        </a> */}
+                        <a
+                            href="/login"
+                            className="py-2 text-blue-800 text-center hover:underline"
+                        >
+                            เข้าสู่ระบบ
+                        </a>
+                    </div>
+                </div>
                 <div className="bg-blue-600 w-full my-6 text-white px-2 py-3">
                     ลงทะเบียน
                 </div>

@@ -7,9 +7,7 @@ class AuthLayout extends Component {
         this.state = {};
     }
 
-    componentDidMount = async () => {
-        console.log("welcome to jowit");
-    };
+    componentDidMount = async () => {};
 
     pageState = () => {
         return cloneElement(this.props.children, {

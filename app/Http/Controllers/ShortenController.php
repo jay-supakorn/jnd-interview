@@ -12,6 +12,24 @@ class ShortenController extends Controller
     {
     }
 
+    public function lists(Request $request)
+    {
+        $Shortens = Shorten::get();
+        $Shortens->transform(function ($shorten) {
+            return $this->mappingData($shorten);
+        });
+        $data['lists'] = $Shortens;
+        $data['message'] = 'success';
+        return response()->json($data, 200);
+    }
+
+    public function mappingData($shorten)
+    {
+        $row['link_original'] = $shorten->link_original;
+        $row['link_shorten'] = config('app.url') . "/" . $shorten->link_shorten;
+        $row['user'] = $shorten->user;
+        return (object)$row;
+    }
     public function actionLink(Request $request)
     {
         $user_id = auth()->user()->id ?? null;
@@ -20,7 +38,7 @@ class ShortenController extends Controller
         $shortenLink = $this->createRandom();
         $Shorten = Shorten::create(['link_original' => $shortenName, 'link_shorten' => $shortenLink, 'user_id' => $user_id]);
         $data['link_original'] = $shortenName;
-        $data['link_shorten'] = $shortenLink;
+        $data['link_shorten'] = config('app.url') . "/" . $shortenLink;
         $data['message'] = 'success';
         return response()->json($data, 200);
     }

@@ -44,6 +44,21 @@ const api = {
             }
         });
     },
+    getLists: () => {
+        return axios({
+            url: `/api/lists`,
+            method: "POST",
+            crossdomain: true,
+            data: {},
+        }).catch((error) => {
+            if (error.response.status === 401) {
+                localStorage.removeItem("accessToken");
+                window.location = "/login";
+            } else {
+                throw error.response;
+            }
+        });
+    },
 };
 
 export default api;

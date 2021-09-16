@@ -90,7 +90,6 @@ class RegisterController extends Controller
         $this->guard()->login($user);
 
         $token = $user->createToken($user->email, ['admin']);
-
         $access_token = explode("|", $token->plainTextToken)[1];
         return response()->json(['user' => $user, 'access_token' => $access_token], 200);
     }

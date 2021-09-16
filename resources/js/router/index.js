@@ -11,6 +11,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Shorten from "../pages/Shorten";
+import Dashboard from "../pages/Dashboard";
 import ProtectedRoute from "../containers/ProtectedRoute";
 
 const RouteSwitch = withRouter((props) => {
@@ -19,7 +20,7 @@ const RouteSwitch = withRouter((props) => {
             <Switch location={props.location}>
                 {/*
                 <Route path="/login" component={Shorten} /> */}
-                <ProtectedRoute path="/dashboard" component={Shorten} />
+                <ProtectedRoute path="/dashboard" component={Dashboard} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/" component={Shorten} />

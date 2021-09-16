@@ -5,16 +5,16 @@ const slice = createSlice({
     name: "shorten",
     initialState: {
         shortenLink: null,
+        lists: [],
     },
     reducers: {
-        // setShortenLink: (state, action) => {
-        //     state.user = action.payload.user;
-        //     state.accessToken = action.payload.access_token;
-        // },
+        setLists: (state, action) => {
+            state.lists = action.payload.lists;
+        },
     },
 });
 
-const {} = slice.actions;
+const { setLists } = slice.actions;
 
 export const actionShortenLink = (value) => async (dispatch) => {
     let response;
@@ -26,6 +26,24 @@ export const actionShortenLink = (value) => async (dispatch) => {
     }
 
     return response;
+};
+
+export const getLists = () => async (dispatch, getState) => {
+    let response;
+    try {
+        response = await Service.api.getLists();
+    } catch (error) {
+        console.log(error.message);
+        throw error;
+    }
+
+    const data = response.data;
+    dispatch(
+        setLists({
+            lists: data.lists,
+        })
+    );
+    return data.lists;
 };
 
 export default slice.reducer;

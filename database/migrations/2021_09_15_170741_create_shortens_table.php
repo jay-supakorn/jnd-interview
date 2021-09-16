@@ -17,7 +17,7 @@ class CreateShortensTable extends Migration
             $table->id();
             $table->string('link_original');
             $table->string('link_shorten');
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

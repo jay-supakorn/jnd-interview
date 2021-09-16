@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Service from "../services";
+import { login } from "../store/reducers/user";
 
 class Login extends Component {
     constructor(props) {
@@ -25,9 +26,9 @@ class Login extends Component {
         } catch (error) {
             console.log(error.data);
         }
-
         if (response) {
             if (response.status === 200) {
+                this.props.saveResponse(response.data);
                 this.props.history.push("/");
             }
         }
@@ -36,6 +37,24 @@ class Login extends Component {
     render() {
         return (
             <>
+                <div className="flex flex-row w-full space-x-4 my-4 justify-between px-6">
+                    <div>
+                        <a
+                            href="/"
+                            className="py-2 text-blue-800 text-center hover:underline"
+                        >
+                            หน้าหลัก
+                        </a>
+                    </div>
+                    <div className="space-x-3">
+                        <a
+                            href="/register"
+                            className="py-2 text-blue-800 text-center hover:underline"
+                        >
+                            ลงทะเบียน
+                        </a>
+                    </div>
+                </div>
                 <div className="bg-blue-600 w-full my-6 text-white px-2 py-3">
                     เข้าสู่ระบบ
                 </div>
@@ -89,4 +108,10 @@ class Login extends Component {
     }
 }
 
-export default connect(null, null)(Login);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        saveResponse: (data) => dispatch(login(data)),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Login);

@@ -25,3 +25,4 @@ Auth::routes();
 // Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 Route::post('/shorten-action', [App\Http\Controllers\ShortenController::class, 'actionLink'])->name('shorten.action');
+Route::post('/lists', [App\Http\Controllers\ShortenController::class, 'lists'])->name('shorten.lists');
