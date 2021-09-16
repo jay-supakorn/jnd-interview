@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Service from "../services";
 import { actionShortenLink } from "../store/reducers/shorten";
 
 class Shorten extends Component {
@@ -7,21 +8,24 @@ class Shorten extends Component {
         super(props);
         this.state = {
             shortenName: null,
+            isShowResult: false,
+            result: {
+                link_original: null,
+                link_shorten: null,
+            },
         };
     }
 
     shortenHandler = async () => {
-        console.log(this.state.shortenName);
-        // shortenLink
-        // shorten-action
+        let response;
         try {
-            await this.props.shortenLink(this.state.shortenName);
+            response = await Service.api.shorten({ shortenName: value });
         } catch (error) {
-            // errorAlert({ message: error.message });
-            // this.setState({
-            //     loading: false,
-            // });
-            return;
+            console.log(error.message);
+        }
+        if (response) {
+            console.log(response.data);
+            this.setState({ isShowResult: true });
         }
     };
 
@@ -46,6 +50,12 @@ class Shorten extends Component {
                 >
                     Shorten
                 </button>
+
+                {this.state.isShowResult ? (
+                    <div className="">{this.state.result}</div>
+                ) : (
+                    <></>
+                )}
             </div>
         );
     }
@@ -57,9 +67,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        shortenLink: (link) => dispatch(actionShortenLink(link)),
-    };
+    return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Shorten);

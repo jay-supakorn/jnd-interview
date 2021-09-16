@@ -3743,23 +3743,22 @@ var Login = /*#__PURE__*/function (_Component) {
 
             case 3:
               response = _context.sent;
-              _context.next = 10;
+              _context.next = 9;
               break;
 
             case 6:
               _context.prev = 6;
               _context.t0 = _context["catch"](0);
-
-              if (_context.t0.data == 422) {}
-
               console.log(_context.t0.data);
 
-            case 10:
+            case 9:
               if (response) {
-                console.log(response);
+                if (response.status === 200) {
+                  _this.props.history.push("/");
+                }
               }
 
-            case 11:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -4097,8 +4096,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_reducers_shorten__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/reducers/shorten */ "./resources/js/store/reducers/shorten.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services */ "./resources/js/services/index.js");
+/* harmony import */ var _store_reducers_shorten__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/reducers/shorten */ "./resources/js/store/reducers/shorten.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
@@ -4137,6 +4137,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
 var Shorten = /*#__PURE__*/function (_Component) {
   _inherits(Shorten, _Component);
 
@@ -4150,32 +4152,42 @@ var Shorten = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "shortenHandler", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log(_this.state.shortenName); // shortenLink
-              // shorten-action
+              _context.prev = 0;
+              _context.next = 3;
+              return _services__WEBPACK_IMPORTED_MODULE_3__["default"].api.shorten({
+                shortenName: value
+              });
 
-              _context.prev = 1;
-              _context.next = 4;
-              return _this.props.shortenLink(_this.state.shortenName);
-
-            case 4:
+            case 3:
+              response = _context.sent;
               _context.next = 9;
               break;
 
             case 6:
               _context.prev = 6;
-              _context.t0 = _context["catch"](1);
-              return _context.abrupt("return");
+              _context.t0 = _context["catch"](0);
+              console.log(_context.t0.message);
 
             case 9:
+              if (response) {
+                console.log(response.data);
+
+                _this.setState({
+                  isShowResult: true
+                });
+              }
+
+            case 10:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 6]]);
+      }, _callee, null, [[0, 6]]);
     })));
 
     _defineProperty(_assertThisInitialized(_this), "inputHandler", function (input, event) {
@@ -4183,7 +4195,12 @@ var Shorten = /*#__PURE__*/function (_Component) {
     });
 
     _this.state = {
-      shortenName: null
+      shortenName: null,
+      isShowResult: false,
+      result: {
+        link_original: null,
+        link_shorten: null
+      }
     };
     return _this;
   }
@@ -4193,20 +4210,23 @@ var Shorten = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "flex flex-row w-full space-x-3 py-6 px-6",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
           className: "py-3 px-6 rounded-full border border-gray-400 w-3/4 outline-none hover:border-blue-800",
           placeholder: "Shorten your link",
           value: this.state.shortenName ? this.state.shortenName : "",
           onChange: function onChange(event) {
             return _this2.inputHandler("shortenName", event);
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
           className: "bg-blue-600 rounded-full px-6 text-white w-1/4 hover:bg-blue-800",
           onClick: this.shortenHandler,
           children: "Shorten"
-        })]
+        }), this.state.isShowResult ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "",
+          children: this.state.result
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {})]
       });
     }
   }]);
@@ -4221,11 +4241,7 @@ function mapStateToProps(state) {
 }
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    shortenLink: function shortenLink(link) {
-      return dispatch((0,_store_reducers_shorten__WEBPACK_IMPORTED_MODULE_3__.actionShortenLink)(link));
-    }
-  };
+  return {};
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapStateToProps, mapDispatchToProps)(Shorten));
@@ -4449,13 +4465,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./resources/js/services/index.js");
-var _this = undefined;
-
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
 
 
 
@@ -4464,21 +4480,15 @@ var slice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.createSlice)({
   initialState: {
     shortenLink: null
   },
-  reducers: {
-    setShortenLink: function setShortenLink(state, action) {
-      state.user = action.payload.user;
-
-      if (action.payload.access_token) {
-        state.accessToken = action.payload.access_token;
-        localStorage.setItem("accessToken", action.payload.access_token);
-      } else {
-        var accessToken = localStorage.getItem("accessToken");
-        state.accessToken = accessToken;
-      }
-    }
+  reducers: {// setShortenLink: (state, action) => {
+    //     state.user = action.payload.user;
+    //     state.accessToken = action.payload.access_token;
+    // },
   }
 });
-var setShortenLink = slice.actions.setShortenLink;
+
+_objectDestructuringEmpty(slice.actions);
+
 var actionShortenLink = function actionShortenLink(value) {
   return /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(dispatch) {
@@ -4495,30 +4505,19 @@ var actionShortenLink = function actionShortenLink(value) {
 
             case 3:
               response = _context.sent;
-              _context.next = 9;
+              _context.next = 10;
               break;
 
             case 6:
               _context.prev = 6;
               _context.t0 = _context["catch"](0);
-
-              if (_context.t0.status === 422) {
-                console.log(_context.t0.data);
-
-                _this.setState({
-                  isError: true
-                });
-              }
-
-            case 9:
-              if (response) {
-                console.log(response); // dispatch(setShortenLink(data));
-                // this.props.saveResponse(response.data);
-                // this.setState({ isSuccess: true });
-                // this.props.history.push("/");
-              }
+              console.log(_context.t0.message);
+              throw _context.t0;
 
             case 10:
+              return _context.abrupt("return", response);
+
+            case 11:
             case "end":
               return _context.stop();
           }

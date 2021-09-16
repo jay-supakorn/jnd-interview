@@ -7,41 +7,25 @@ const slice = createSlice({
         shortenLink: null,
     },
     reducers: {
-        setShortenLink: (state, action) => {
-            state.user = action.payload.user;
-            if (action.payload.access_token) {
-                state.accessToken = action.payload.access_token;
-                localStorage.setItem(
-                    "accessToken",
-                    action.payload.access_token
-                );
-            } else {
-                const accessToken = localStorage.getItem("accessToken");
-                state.accessToken = accessToken;
-            }
-        },
+        // setShortenLink: (state, action) => {
+        //     state.user = action.payload.user;
+        //     state.accessToken = action.payload.access_token;
+        // },
     },
 });
 
-const { setShortenLink } = slice.actions;
+const {} = slice.actions;
 
 export const actionShortenLink = (value) => async (dispatch) => {
     let response;
     try {
         response = await Service.api.shorten({ shortenName: value });
     } catch (error) {
-        if (error.status === 422) {
-            console.log(error.data);
-            this.setState({ isError: true });
-        }
+        console.log(error.message);
+        throw error;
     }
-    if (response) {
-        console.log(response);
-        // dispatch(setShortenLink(data));
-        // this.props.saveResponse(response.data);
-        // this.setState({ isSuccess: true });
-        // this.props.history.push("/");
-    }
+
+    return response;
 };
 
 export default slice.reducer;

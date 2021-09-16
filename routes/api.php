@@ -21,4 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Auth::routes();
 
+// Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
+// Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+
 Route::post('/shorten-action', [App\Http\Controllers\ShortenController::class, 'actionLink'])->name('shorten.action');

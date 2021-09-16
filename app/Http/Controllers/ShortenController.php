@@ -19,7 +19,8 @@ class ShortenController extends Controller
         $data = array();
         $shortenLink = $this->createRandom();
         $Shorten = Shorten::create(['link_original' => $shortenName, 'link_shorten' => $shortenLink, 'user_id' => $user_id]);
-        $data['shortenLink'] = $shortenLink;
+        $data['link_original'] = $shortenName;
+        $data['link_shorten'] = $shortenLink;
         $data['message'] = 'success';
         return response()->json($data, 200);
     }

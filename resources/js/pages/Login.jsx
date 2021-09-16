@@ -23,12 +23,13 @@ class Login extends Component {
                 password: this.state.password,
             });
         } catch (error) {
-            if (error.data == 422) {
-            }
             console.log(error.data);
         }
+
         if (response) {
-            console.log(response);
+            if (response.status === 200) {
+                this.props.history.push("/");
+            }
         }
     };
 

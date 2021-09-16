@@ -33,5 +33,3 @@ Route::get('/{uri?}', function ($uri = null) {
         return view('welcome');
     }
 })->where('uri', '(.*)');
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
